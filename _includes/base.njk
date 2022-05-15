@@ -1,0 +1,22 @@
+<!doctype html>
+<html data-theme='dark' lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Templar</title>
+    <!--<title>{{ title or metadata.title }}</title>-->
+    <meta name="description" content="{{ description or metadata.description }}">
+    <link rel="stylesheet" href="{{ './css/styles.scss' | url }}">
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+  </head>
+  <body>
+    <header>
+    </header>
+    <main>
+      <h1>Base Layout</h1>
+      {{ content | safe }}
+    </main>
+    <footer>
+    </footer>
+  </body>
+</html>
