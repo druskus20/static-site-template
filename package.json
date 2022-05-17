@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@11ty/eleventy": "^1.0.0"
+    "@11ty/eleventy": "^1.0.0",
+    "eleventy-plugin-dart-sass": "^1.0.3",
+    "eleventy-sass": "^1.2.1",
+    "typescript": "^4.6.4"
   },
   "scripts": {
     "clean": "rm -rf build _site .tmp .parcel-cache",
