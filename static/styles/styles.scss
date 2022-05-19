@@ -1,8 +1,10 @@
 @import "colors";
 
-html, body {
+html,
+body {
   background-color: red;
   background-color: $red;
   background-color: blue;
   background-color: $red;
+
 }

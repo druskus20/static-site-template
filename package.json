@@ -1,30 +1,25 @@
 {
-  "name": "templar",
+  "name": "static-site-template",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@11ty/eleventy": "^1.0.0",
-    "eleventy-plugin-dart-sass": "^1.0.3",
-    "eleventy-sass": "^1.2.1",
-    "typescript": "^4.6.4"
-  },
   "scripts": {
-    "clean": "rm -rf build _site .tmp .parcel-cache",
-    "build:eleventy": "./build-and-parcel.sh",
-    "build:sass": "sass --no-source-map static/scss:.tmp/css",
-    "build": "npm-run-all build:sass build:eleventy",
-    "dev": "run-p watch serve",
-    "serve": "node node-server.js",
+    "build": "npm run parcelrootfix && npm run build:eleventy && npm run build:parcel",
+    "build:eleventy": "eleventy",
+    "build:parcel": "cd .tmp_eleventy && parcel build index.html --dist-dir ../_site",
+
+    "watch": "npm run parcelrootfix && run-p watch:eleventy watch:parcel",
     "watch:eleventy": "eleventy --watch",
-    "watch:sass": "sass --no-source-map --watch static/scss:.tmp/css",
-    "watch": "run-p watch:eleventy watch:sass",
-    "fmt": "prettier --write '{./,./{_includes,_data}/**/}*.{json,md,js,css,scss}'"
+    "watch:parcel": "cd .tmp_eleventy && npx parcel serve index.html --dist-dir ../_site",
+
+    "parcelrootfix": "mkdir .tmp_eleventy 2> /dev/null; touch .tmp_eleventy/.hg",
+    "fmt": "prettier --write '{./,./{static,_includes,_data}/**/}*.{json,md,js,css,scss}'",
+    "clean": "rm -rf _site .tmp_eleventy .parcel-cache dist"
   },
   "devDependencies": {
+    "@11ty/eleventy": "^1.0.0",
+    "@parcel/transformer-sass": "^2.5.0",
     "npm-run-all": "^4.1.5",
-    "parcel": "^2.3.2",
-    "prettier": "^1.19.1",
-    "sass": "^1.49.7",
-    "superstatic": "^7.1.0"
+    "parcel": "^2.5.0",
+    "prettier": "^1.19.1"
   }
 }
