@@ -5,12 +5,10 @@
   "scripts": {
     "build": "npm run parcelrootfix && npm run build:eleventy && npm run build:parcel",
     "build:eleventy": "eleventy",
-    "build:parcel": "cd .tmp_eleventy && parcel build index.html --dist-dir ../_site",
-
+    "build:parcel": "cp ./.parcelrc .tmp_eleventy && cd .tmp_eleventy && parcel build index.html --dist-dir ../_site",
     "watch": "npm run parcelrootfix && run-p watch:eleventy watch:parcel",
     "watch:eleventy": "eleventy --watch",
-    "watch:parcel": "cd .tmp_eleventy && npx parcel serve index.html --dist-dir ../_site",
-
+    "watch:parcel": "cp ./.parcelrc .tmp_eleventy && cd .tmp_eleventy && npx parcel serve index.html --dist-dir ../_site",
     "parcelrootfix": "mkdir .tmp_eleventy 2> /dev/null; touch .tmp_eleventy/.hg",
     "fmt": "prettier --write '{./,./{static,_includes,_data}/**/}*.{json,md,js,css,scss}'",
     "clean": "rm -rf _site .tmp_eleventy .parcel-cache dist"
@@ -20,6 +18,7 @@
     "@parcel/transformer-sass": "^2.5.0",
     "npm-run-all": "^4.1.5",
     "parcel": "^2.5.0",
+    "parcel-optimizer-friendly-urls": "^0.2.0",
     "prettier": "^1.19.1"
   }
 }

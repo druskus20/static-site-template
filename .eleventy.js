@@ -5,7 +5,6 @@ module.exports = function(config) {
     static: "/"
   });
 
-
   return {
     templateFormats: ["md", "njk", "html"],
     // Pre-process *.md files with: (default: `liquid`)
