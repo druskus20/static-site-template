@@ -4,6 +4,7 @@ layout: list.njk
 ---
 <h1>Post Index</h1>
 <ul>
+  <script src="posts-script.ts"></script>
   {% for post in collections.post %}
   <li><a href="{{ post.url }}">{{ post.data.title }}</a></li>
   {% endfor %}

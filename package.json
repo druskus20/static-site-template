@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "build": "eleventy",
-    "bundle": "parcel",
+    "bundle": "cd _site && touch .hg && npx parcel build index.html --dist-dir ../_parcel --public-url 'druskus.com' --no-cache",
     "serve": "eleventy --serve",
     "fmt": "prettier --write '{./,./{static,_includes,_data}/**/}*.{json,md,js,css,scss}'",
-    "clean": "rm -rf _site .tmp_eleventy .parcel-cache dist"
+    "clean": "rm -rf _site .tmp_eleventy .parcel-cache dist _parcel"
   },
   "devDependencies": {
     "@11ty/eleventy": "^1.0.0",

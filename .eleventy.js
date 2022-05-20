@@ -28,7 +28,7 @@ module.exports = function(config) {
 
     dir: {
       input: "content",
-      output: ".tmp_eleventy",
+      output: "_site",
       includes: "../_includes",
       data: "../_data"
     }
