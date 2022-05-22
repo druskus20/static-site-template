@@ -1,8 +1,6 @@
 ---
 title: "My other Post"
 tags: ["post"]
+---# My Post
 
----
-
-# My Post
 This is my post

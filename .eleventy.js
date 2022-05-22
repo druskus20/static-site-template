@@ -9,13 +9,13 @@ module.exports = function(config) {
   config.addPassthroughCopy({
     static: "/"
   });
-    
+
   addScssExtension(config);
   addTsExtension(config);
   addTransformScssLinks(config);
   addTransformTsLinks(config);
   addTransformIndexToHtmlLinks(config);
-  
+
   config.addTemplateFormats(["md", "njk", "html"]);
 
   return {
@@ -38,13 +38,19 @@ module.exports = function(config) {
 function addTransformScssLinks(config) {
   config.addTransform("transform-scsslinks", async function(contents) {
     if (this.outputPath.endsWith(".html")) {
-      const plugin = urls({ eachURL: (url) => {
-        if (url.endsWith(".scss")) {
-          return url.slice(0, -5) + ".css";
+      const plugin = urls({
+        eachURL: url => {
+          if (url.endsWith(".scss")) {
+            return url.slice(0, -5) + ".css";
+          }
+          return url;
         }
-        return url;
-      }});
-      const res = (await (posthtml().use(plugin).process(contents))).html;
+      });
+      const res = (
+        await posthtml()
+          .use(plugin)
+          .process(contents)
+      ).html;
       return res;
     }
     return contents; // no change done.
@@ -54,13 +60,19 @@ function addTransformScssLinks(config) {
 function addTransformTsLinks(config) {
   config.addTransform("transform-tslinks", async function(contents) {
     if (this.outputPath.endsWith(".html")) {
-      const plugin = urls({ eachURL: (url) => {
-        if (url.endsWith(".ts")) {
-          return url.slice(0, -3) + ".js";
+      const plugin = urls({
+        eachURL: url => {
+          if (url.endsWith(".ts")) {
+            return url.slice(0, -3) + ".js";
+          }
+          return url;
         }
-        return url;
-      }});
-      const res = (await (posthtml().use(plugin).process(contents))).html;
+      });
+      const res = (
+        await posthtml()
+          .use(plugin)
+          .process(contents)
+      ).html;
       return res;
     }
     return contents; // no change done.
@@ -71,19 +83,31 @@ function addTransformIndexToHtmlLinks(config) {
   config.addTransform("transform-htmllinks", async function(contents) {
     if (this.outputPath.endsWith(".html")) {
       // add "index.html" to links
-      const plugin = urls({ eachURL: (url) => {
-        // if its a directory
-        if (!(url.split('/').pop().indexOf('.') > -1)) {
-          if (url.charAt(url.length - 1) != "/") {
-            return url + "/index.html";
+      const plugin = urls({
+        eachURL: url => {
+          // if its a directory
+          if (
+            !(
+              url
+                .split("/")
+                .pop()
+                .indexOf(".") > -1
+            )
+          ) {
+            if (url.charAt(url.length - 1) != "/") {
+              return url + "/index.html";
+            } else {
+              return url + "index.html";
+            }
           }
-          else {
-            return url + "index.html";
-          }
+          return url;
         }
-        return url;
-      }});
-      const res = (await (posthtml().use(plugin).process(contents))).html;
+      });
+      const res = (
+        await posthtml()
+          .use(plugin)
+          .process(contents)
+      ).html;
       return res;
     }
     return contents; // no change done.
@@ -95,27 +119,29 @@ function addScssExtension(config) {
   config.addExtension("scss", {
     outputFileExtension: "css",
     //read: false,
-    compile: function (contents, inputPath) {
+    compile: function(contents, inputPath) {
       let loadPaths = ["_includes/styles"];
-      console.log(loadPaths);
       return () => {
         let ret = sass.compile(inputPath, {
-          loadPaths,
+          loadPaths
         });
         return ret.css.toString("utf8");
       };
     },
     compileOptions: {
-    permalink: function(contents, inputPath) {
-      return (data) => {
-        if (data.permalink) {
-          throw new Error("Do not use permalink with .scss templates");
-        }
-        const permalink = data.page.filePathStem.replace("/_assets", "") + "." + data.page.outputFileExtension;
-        return permalink;
+      permalink: function(contents, inputPath) {
+        return data => {
+          if (data.permalink) {
+            throw new Error("Do not use permalink with .scss templates");
+          }
+          const permalink =
+            data.page.filePathStem.replace("/_assets", "") +
+            "." +
+            data.page.outputFileExtension;
+          return permalink;
+        };
       }
     }
-  }
   });
 }
 
@@ -134,16 +160,18 @@ function addTsExtension(config) {
       };
     },
     compileOptions: {
-    permalink: function(contents, inputPath) {
-      return (data) => {
-        if (data.permalink) {
-          throw new Error("Do not use permalink with .ts templates");
-        }
-        const permalink = data.page.filePathStem.replace("/_assets", "") + "." + data.page.outputFileExtension;
-        return permalink;
+      permalink: function(contents, inputPath) {
+        return data => {
+          if (data.permalink) {
+            throw new Error("Do not use permalink with .ts templates");
+          }
+          const permalink =
+            data.page.filePathStem.replace("/_assets", "") +
+            "." +
+            data.page.outputFileExtension;
+          return permalink;
+        };
       }
     }
-  }
   });
 }
-
