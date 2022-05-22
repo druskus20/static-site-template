@@ -2,5 +2,5 @@
 title: "My Post"
 tags: ["post"]
 ---
-<script src="my-post-script.ts"></script>
+<script src="/assets/posts/my-post/my-post-script.ts"></script>
 My post njk
