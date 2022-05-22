@@ -7,6 +7,10 @@ A static website template project using 11ty and Parcel so I can reuse it for my
 - [ ] Instead of using {{ Content }} maybe use blocks and includes https://stackoverflow.com/questions/35496514/nunjucks-blocks-defined-within-include-partial-file-ignored-by-extend
 - [ ] Partials for footer / header etc
 - [ ] Figure out how to run parcel with a different root
+  - [ ] just copy .parcelrc and another package.json into "site-eleventy", when building parcel
+      - Maybe with a passthrough copy like surma does
+  - [ ] Parcel needs a .hg file to detect the new root module.
+  - [ ] The alternative would be sourcing asstets from outside "site_eleventy", but I dont quite like that
 - [ ] Figure out how to input ts from separate directories
   - [ ] Also figure out how to import styles from different directories
       - [ ] Local styles for a certain page
@@ -18,3 +22,67 @@ A static website template project using 11ty and Parcel so I can reuse it for my
   - [ ] Look into https://www.npmjs.com/package/eleventy-sass for extra directories (?)
   - [ ] Look into https://www.11ty.dev/docs/languages/custom/#compileoptions.permalink-to-override-permalink-compilation to override the path where the file gets generated (?)
 - [ ] Create deployment pipelines
+
+## Source stuff
+
+```
+src/
+  content/
+    index.njk
+    posts/
+      index.njk
+      post-1.md
+
+  assets/
+    styles.scss
+    posts/
+      styles.scss
+      post-1/
+        styles.scss
+    script.ts
+    posts/
+      script.ts
+      post-1/
+        script.ts
+   
+_static
+  image.png
+  posts/
+    image.png
+    post-1/
+      image.png
+
+_includes
+  styles/
+    _colors.scss
+  base.njk
+  partials/
+    header.njk
+```
+
+
+## Generated stuff
+```
+index.html
+posts/
+  index.html
+  post-1/
+    index.html
+
+assets/
+  styles.css
+  posts/
+    styles.css
+    post-1/
+      styles.css
+  script.js
+  posts/
+    script.js
+    post-1/
+      script.js
+  image.png
+  posts/
+    image.png
+    post-1/
+      image.png
+```

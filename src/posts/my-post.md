@@ -1,6 +1,5 @@
 ---
 title: "My Post"
-layout: "post"
 tags: ["post"]
 ---
 <script src="my-post-script.ts"></script>

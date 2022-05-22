@@ -27,7 +27,7 @@ module.exports = function(config) {
     htmlTemplateEngine: "njk",
 
     dir: {
-      input: "content",
+      input: "src",
       output: "_site_eleventy",
       includes: "../_includes",
       data: "../_data"
@@ -94,13 +94,12 @@ function addScssExtension(config) {
   config.addTemplateFormats("scss");
   config.addExtension("scss", {
     outputFileExtension: "css",
-    compile: function (contents, inputPath) {
-      let includePaths = [this.config.dir.includes];
+    compile: function (_, inputPath) {
+      let loadPaths = ["_includes/styles"];
+      console.log(loadPaths);
       return () => {
-        let ret = sass.renderSync({
-          file: inputPath,
-          includePaths,
-          data: contents
+        let ret = sass.compile(inputPath, {
+          loadPaths,
         });
         return ret.css.toString("utf8");
       };
