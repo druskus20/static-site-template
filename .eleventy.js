@@ -94,7 +94,8 @@ function addScssExtension(config) {
   config.addTemplateFormats("scss");
   config.addExtension("scss", {
     outputFileExtension: "css",
-    compile: function (_, inputPath) {
+    //read: false,
+    compile: function (contents, inputPath) {
       let loadPaths = ["_includes/styles"];
       console.log(loadPaths);
       return () => {
@@ -103,7 +104,18 @@ function addScssExtension(config) {
         });
         return ret.css.toString("utf8");
       };
+    },
+    compileOptions: {
+    permalink: function(contents, inputPath) {
+      return (data) => {
+        if (data.permalink) {
+          throw new Error("Do not use permalink with .scss templates");
+        }
+        const permalink = data.page.filePathStem.replace("/_assets", "") + "." + data.page.outputFileExtension;
+        return permalink;
+      }
     }
+  }
   });
 }
 
@@ -120,7 +132,18 @@ function addTsExtension(config) {
         });
         return ret.outputText;
       };
+    },
+    compileOptions: {
+    permalink: function(contents, inputPath) {
+      return (data) => {
+        if (data.permalink) {
+          throw new Error("Do not use permalink with .ts templates");
+        }
+        const permalink = data.page.filePathStem.replace("/_assets", "") + "." + data.page.outputFileExtension;
+        return permalink;
+      }
     }
+  }
   });
 }
 

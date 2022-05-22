@@ -2,5 +2,6 @@
 title: "My Post"
 tags: ["post"]
 ---
-<script src="/assets/posts/my-post/my-post-script.ts"></script>
+<link rel="stylesheet" href="{{ 'styles.scss' | url }}">
+<script src="/posts/my-post/my-post.ts"></script>
 My post njk
