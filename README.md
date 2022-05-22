@@ -20,7 +20,7 @@ _data/
 _includes/  # Layouts, partials, macros and _scss files
 static/     # Things that don't get templated. They get copied to /
 src/        # Things that get templated
-            # Contents of the website, aswell as  Scss and Ts. 
+            #  Contents of the website, as well as  Scss and Ts. 
 ```
 
 ### linking directly to scss and ts in your HTML
