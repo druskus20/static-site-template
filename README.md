@@ -20,15 +20,8 @@ _data/
 _includes/  # Layouts, partials, macros and _scss files
 static/     # Things that don't get templated. They get copied to /
 src/        # Things that get templated
-  _src/     # Contents of the website
-  _assets/  # Scss and Ts. When generated, the _assets directory disappears and
-            # the contents get copied to /
+            # Contents of the website, aswell as  Scss and Ts. 
 ```
-
-### `_assets`
-
-Scss and Ts files are converted into CSS and js via 11ty Extensions. They also remove `_assets` from the
-permalink, so the files get generated at `/` instead of `/_assets`.
 
 ### linking directly to scss and ts in your HTML
 
@@ -37,31 +30,19 @@ point to their CSS and js counterparts.
 
 ### local styles and scripts
 
-Upon build, the contents of `_assets` will be compiled into `/`. This allows us to link to local styles per
-post, with relative references.
-
-Example:
-
+Local Scss and Ts files are supported. The engine won't do any templating on
+them, apart from compiling them to js and css automatically. To include them, I added
+2 page variables: 
 ```
-_assets/posts/my-post/styles.scss
+localstyles: "./styles.scss"
+localscript: "./my-script.ts"
 ```
-
-Will generate:
-
-```
-/posts/my-post/styles.css
-```
-
-Therefore, we can include it from my-post with:
-
-```
-<link rel="stylesheet" href="./styles.scss">
-```
-
-### index.html
+### index.html in urls
 
 Bundling with Parcel requires that `href`s to other pages end with `index.html`. For that, I have
 created an 11ty Transform that inserts `index.html` at the end of the URLs that don't have it.
+
+Once parcel bundles the page, those annoying `index.html` get removed via `parcel-optimizer-friendly-urls`.
 
 ### Parcel
 
@@ -75,22 +56,3 @@ parcel does not allow us to do this through configuration, we need to trick it i
 that is the root directory. For that reason, from package.json, we create a `_site_eleventy/.hg` file
 before building.
 
-### Possible alternatives
-
-#### Merging \_assets and src
-
-I decided not to go with this because otherwise, 11ty will recognize scss/ts
-files as pages. Maybe there's a way to avoid that, I'd be interesting to look
-into it, as it would probably be more intuitive.
-
-#### Building parcel from `/` instead of `/_site_eleventy`
-
-I considered it, but I didn't want to rely on Parcel to build my scss and ts. It
-would also mean that the links to styles and scripts inside my HTML would need
-to reference my project root, as otherwise, Parcel wouldn't find them. In
-general, it generates too much confusion and it's likely to break your links.
-
-## TODO
-
-- Ideally, I would like to have \_assets at the same level as static. But since 11ty seems to need them inside the input directory for them to be processed.
-- I would also like into how to make 11ty exclude scss and ts files from collections, as then I wouldn't need to separate them into `_assets`.
