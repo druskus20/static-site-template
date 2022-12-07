@@ -2,7 +2,7 @@ const posthtml = require("posthtml");
 const urls = require("posthtml-urls");
 
 function addTransformTsLinks(config) {
-  config.addTransform("transform-tslinks", async function (contents) {
+  config.addTransform("transform-tslinks", async function(contents) {
     if (this.outputPath.endsWith(".html")) {
       const plugin = urls({
         eachURL: url => {
@@ -25,6 +25,6 @@ function addTransformTsLinks(config) {
 
 module.exports = {
   configFunction: async (eleventyConfig, _ = {}) => {
-    addTransformTsLinks(eleventyConfig)
-  },
+    addTransformTsLinks(eleventyConfig);
+  }
 };

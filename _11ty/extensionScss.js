@@ -4,7 +4,7 @@ function addScssExtension(config) {
   config.addTemplateFormats("scss");
   config.addExtension("scss", {
     outputFileExtension: "css",
-    compile: function (_, inputPath) {
+    compile: function(_, inputPath) {
       let loadPaths = ["_includes/styles"];
       return () => {
         let ret = sass.compile(inputPath, {
@@ -22,7 +22,6 @@ function addScssExtension(config) {
 
 module.exports = {
   configFunction: async (eleventyConfig, _ = {}) => {
-    addScssExtension(eleventyConfig)
-  },
+    addScssExtension(eleventyConfig);
+  }
 };
-

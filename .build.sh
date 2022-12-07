@@ -28,6 +28,8 @@ function parcel_serve() {
 
 function eleventy_build() {
     npx eleventy 
+    fmt_files=$(find _site_eleventy -type f -regex ".*\.\(js\|html\|css\)")
+    npx prettier --write $fmt_files
 }
 
 function eleventy_serve() {
@@ -54,7 +56,9 @@ case $1 in
         rm -rf _site .tmp_eleventy .parcel-cache dist _parcel _site_eleventy _site_parcel
         ;;
     "fmt")
-        prettier --write '{./,./{src,_assets,static,_includes,_data}/**/}*.{json,md,js,css,scss}'
+        # format files in _src, _assets, static, _includes, _data, _11ty
+        fmt_files=$(find src static _includes _data _11ty -type f -regex ".*\.\(js\|html\|css\|ts\|scss\)")
+        npx prettier --write $fmt_files
         ;;
     *)
         echo "Invalid argument"

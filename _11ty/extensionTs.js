@@ -23,6 +23,6 @@ function addTsExtension(config) {
 
 module.exports = {
   configFunction: async (eleventyConfig, _ = {}) => {
-    addTsExtension(eleventyConfig)
-  },
+    addTsExtension(eleventyConfig);
+  }
 };
