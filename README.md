@@ -67,3 +67,7 @@ markdown-it allows us to use markdown plugins aswell. For example, this allows u
 ```md
 hero # Headline {.text-5xl} 
 ```
+
+### Shortcodes and Macros
+
+Both shortcodes and macros are supported. They are located under `_includes`.
