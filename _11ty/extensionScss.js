@@ -4,24 +4,24 @@ function addScssExtension(config) {
   config.addTemplateFormats("scss");
   config.addExtension("scss", {
     outputFileExtension: "css",
-    compile: function(_, inputPath) {
+    compile: function (_, inputPath) {
       let loadPaths = ["_includes/styles"];
       return () => {
         let ret = sass.compile(inputPath, {
-          loadPaths
+          loadPaths,
         });
         return ret.css.toString("utf8");
       };
     },
     getData: () => ({
       layout: null,
-      eleventyExcludeFromCollections: true
-    })
+      eleventyExcludeFromCollections: true,
+    }),
   });
 }
 
 module.exports = {
   configFunction: async (eleventyConfig, _ = {}) => {
     addScssExtension(eleventyConfig);
-  }
+  },
 };
