@@ -37,6 +37,10 @@ them, apart from compiling them to js and css automatically. To include them, I 
 localstyles: "./styles.scss"
 localscript: "./my-script.ts"
 ```
+
+With this system we can have per-page scripts and styles on demand, just in case
+we need to add some custom functionality to a page.
+
 ### index.html in urls
 
 Bundling with Parcel requires that `href`s to other pages end with `index.html`. For that, I have

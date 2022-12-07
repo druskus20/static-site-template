@@ -6,7 +6,6 @@
     "build": "./.build.sh build eleventy && ./.build.sh build parcel",
     "build:eleventy": "./.build.sh build eleventy",
     "build:parcel": "./.build.sh build parcel",
-    "serve": "././build.sh serve eleventy && ./.build.sh serve parcel",
     "serve:eleventy": "./.build.sh serve eleventy",
     "serve:parcel": "./.build.sh serve parcel",
     "fmt": "./.build.sh fmt",

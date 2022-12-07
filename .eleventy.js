@@ -11,7 +11,7 @@ module.exports = function (config) {
   // Watch for changes to static files
   config.addWatchTarget("./static/");
   config.addPassthroughCopy({
-    static: "./"
+    static: "/"
     // static: "./static"
   });
 

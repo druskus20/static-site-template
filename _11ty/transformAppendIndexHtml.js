@@ -2,7 +2,7 @@ const posthtml = require("posthtml");
 const urls = require("posthtml-urls");
 
 function addTransformIndexToHtmlLinks(config) {
-  config.addTransform("transform-htmllinks", async function(contents) {
+  config.addTransform("transform-htmllinks", async function (contents) {
     if (this.outputPath.endsWith(".html")) {
       // add "index.html" to links
       const plugin = urls({

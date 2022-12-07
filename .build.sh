@@ -9,9 +9,15 @@
 ## - fmt
 
 function parcel_build() {
+    if [ -z "$PUBLIC_URL" ]; then
+        echo "Error: PUBLIC_URL is not set"
+        exit 1
+    else 
+        echo "PUBLIC_URL is set to '$PUBLIC_URL'"
+    fi
     cp .parcelrc _site_eleventy 
     touch _site_eleventy/.hg 
-    npx parcel build _site_eleventy/index.html --dist-dir _site_parcel --no-cache --public-url "$PUBLIC_URL"
+    npx parcel build _site_eleventy/index.html --dist-dir "./_site_parcel" --no-cache --public-url "$PUBLIC_URL"
 }
 
 function parcel_serve() {
@@ -28,7 +34,8 @@ function eleventy_serve() {
     npx eleventy --serve
 }
 
-echo $1 $2
+
+echo Running $1 $2
 
 case $1 in
     "build" | "serve")  
