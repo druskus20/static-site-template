@@ -56,3 +56,10 @@ parcel does not allow us to do this through configuration, we need to trick it i
 that is the root directory. For that reason, from package.json, we create a `_site_eleventy/.hg` file
 before building.
 
+### Markdown-it and it's plugins
+
+markdown-it allows us to use markdown plugins aswell. For example, this allows us to add inline styles `markdown-it-attrs`.
+
+```md
+hero # Headline {.text-5xl} 
+```

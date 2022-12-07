@@ -4,8 +4,7 @@ function addScssExtension(config) {
   config.addTemplateFormats("scss");
   config.addExtension("scss", {
     outputFileExtension: "css",
-    //read: false,
-    compile: function(_, inputPath) {
+    compile: function (_, inputPath) {
       let loadPaths = ["_includes/styles"];
       return () => {
         let ret = sass.compile(inputPath, {
