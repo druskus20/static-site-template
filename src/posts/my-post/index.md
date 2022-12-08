@@ -5,4 +5,5 @@ localscript: "my-post.ts"
 tags: ["post"]
 ---
 
-My post njk
+My post njk { .my-post }
+

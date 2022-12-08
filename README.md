@@ -59,3 +59,7 @@ Eleventy allows us to change the markdown engine. I decided to use markdown-it s
 ```md
 hero # Headline {.text-5xl} 
 ```
+
+### Shortcodes and Macros
+
+Both shortcodes and macros are supported. They are located under `_includes`.

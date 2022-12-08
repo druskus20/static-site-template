@@ -1,1 +1,1 @@
-console.log("posts script")
+console.log("posts script");
